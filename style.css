@@ -13,10 +13,13 @@ body{
     justify-content: center;
     flex-wrap: wrap;
     width: 100%;
+    flex-grow: 0;
+    flex-shrink: 1;
+    align-items: center;
 }
 
 
-#chat {
+#side {
     width: 20vw;
     flex-grow: 0;
     flex-shrink: 0;
@@ -27,6 +30,26 @@ body{
     justify-content: flex-end;
 }
 
+#chat{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
 .emote{
     transition: .3s ease-out;
+}
+
+.player iframe{
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.player{
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
 }

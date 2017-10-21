@@ -8,6 +8,8 @@ var delayTime = 30;
 var minScale = .25;
 var maxScale = 5;
 var msgLimit = 50;
+var paddingLimit = 25;
+
 
 
 var emoteMap = {};
@@ -44,6 +46,8 @@ client.on("chat", function (channel, userstate, message, self) {
                 emoteMap.emotes[emote].count = 0;
                 emoteMap.emotes[emote].weight = 0.00;
                 emoteMap.emotes[emote].lastUsed = 0;
+                emoteMap.emotes[emote].ranges = userstate.emotes[emote];
+                emoteMap.emotes[emote].name = getEmoteName(message, userstate.emotes[emote][0]);
             }
 
             emoteMap.emotes[emote].count += userstate.emotes[emote].length;
@@ -68,6 +72,12 @@ client.on("chat", function (channel, userstate, message, self) {
     }
 });
 
+function getEmoteName(message, range){
+    console.log(message, " ", range)
+    var markers = range.split('-');
+    console.log(markers);
+    return message.substring(markers[0], markers[1] + 1);
+}
 
 function clamp(value, low, high){
     if(value > high){
@@ -102,14 +112,17 @@ function drawEmotes(){
         var currEmote = emoteMap.emotes[emote];
         var emoteId = `#emote${emote}`;
         var emoteElement = $(emoteId);
-        var emoteScale = `scale(${clamp(currEmote.weight * maxScale, minScale, maxScale)})`
+        var emoteScaledWeight = clamp(currEmote.weight * maxScale, minScale, maxScale);
+        var emoteScale = `scale(${emoteScaledWeight})`
         
         if(!emoteElement[0] && currEmote.weight > 0){
             var newEmoteElement = $("<img>");
             newEmoteElement.attr("src", `https://static-cdn.jtvnw.net/emoticons/v1/${emote}/3.0`);
             newEmoteElement.attr("id", `emote${emote}`);
+            newEmoteElement.attr("data-weight", currEmote.weight);
             newEmoteElement.addClass("emote");
             newEmoteElement.css("transform", emoteScale);
+            newEmoteElement.css("padding", `${emoteScaledWeight * paddingLimit}px`);
             $("#kappa").prepend(newEmoteElement);
         } else {
             if(currEmote.weight == 0){
@@ -117,9 +130,11 @@ function drawEmotes(){
                 continue;
             }
             emoteElement.css("transform", emoteScale);
-        }
-        
+            emoteElement.css("padding", `${emoteScaledWeight * paddingLimit}px`);
+            emoteElement.attr("data-weight", currEmote.weight);
+        }    
     }
+
     
 }
 
