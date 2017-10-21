@@ -2,7 +2,13 @@ var emoteQueue = new Queue();
 var msgQueue = new Queue();
 
 var startTime = now();
-var delayTime = 60;
+var delayTime = 30;
+
+
+var minScale = .25;
+var maxScale = 5;
+var msgLimit = 50;
+
 
 var emoteMap = {};
 emoteMap.totalEmotes = 0;
@@ -20,7 +26,7 @@ client.on("chat", function (channel, userstate, message, self) {
     
     if(userstate.emotes){
         
-        
+        drawchat({message: message, userstate: userstate, channel: channel});
         
         for(emote in userstate.emotes){
             
@@ -96,7 +102,7 @@ function drawEmotes(){
         var currEmote = emoteMap.emotes[emote];
         var emoteId = `#emote${emote}`;
         var emoteElement = $(emoteId);
-        var emoteScale = `scale(${clamp(currEmote.weight * 3, .5, 3)})`
+        var emoteScale = `scale(${clamp(currEmote.weight * maxScale, minScale, maxScale)})`
         
         if(!emoteElement[0] && currEmote.weight > 0){
             var newEmoteElement = $("<img>");
@@ -115,4 +121,23 @@ function drawEmotes(){
         
     }
     
+}
+
+function drawchat(msgObj){
+    
+    if($('.msg').length > msgLimit)
+        $('.msg:first-of-type').remove();
+    
+    
+    var chatElement = $("<div></div>");
+    chatElement.addClass("msg");
+    var userName = $(`<span></span>`);
+    userName.css("color", msgObj.userstate.color);
+    userName.html(msgObj.userstate['display-name']);
+    console.log(userName);
+    var chatMsg = `<${msgObj.channel}> ${userName[0].outerHTML}: ${msgObj.message}`;
+    console.log(chatMsg);
+    chatElement.append(chatMsg);
+    
+    $("#chat").append(chatElement);
 }

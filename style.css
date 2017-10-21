@@ -9,5 +9,20 @@ body{
 }
 
 .center {
-    
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-grow: 1;
+}
+
+
+#chat {
+    width: 20vw;
+    flex-grow: 0;
+    flex-shrink: 0;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
