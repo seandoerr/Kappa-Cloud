@@ -1,15 +1,15 @@
 var options = {
     options: {
-        debug: true
+        debug: false
     },
     connection: {
         reconnect: true,
     },
     identity: {
-        username: "",
-        password: ""
+        username: "MrMcBot",
+        password: "oauth:63mtcfcc4lko1lm519zgqk5ykcgcjm"
     },
-    channels: ["#nl_kripp"]
+    channels: ["#nl_kripp", "#pgl_dota"]
 };
 
 var client = new tmi.client(options);
