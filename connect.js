@@ -6,8 +6,8 @@ var options = {
         reconnect: true,
     },
     identity: {
-        username: "TheDapperRussian",
-        password: "oauth:j5qhr7pjx9fbgeoxjhjzu1bxfturan"
+        username: "",
+        password: ""
     },
     channels: ["#nl_kripp"]
 };
