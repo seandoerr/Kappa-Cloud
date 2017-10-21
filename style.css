@@ -12,7 +12,7 @@ body{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    flex-grow: 1;
+    width: 100%;
 }
 
 
@@ -25,4 +25,8 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+}
+
+.emote{
+    transition: .3s ease-out;
 }
