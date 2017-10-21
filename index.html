@@ -1,27 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-        <title>Kappa Cloud</title>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="https://cdn.tmijs.org/js/latest/1.x/tmi.min.js"></script>
-        <script src="http://code.stephenmorley.org/javascript/queues/Queue.js"></script>
-        <script src="connect.js"></script>
-        <script src="app.js"></script>
-        <link rel="stylesheet" href="style.css">
-	</head>
-	<body>
-	    <section class="center" id="kappa">
-	        
-	    </section>
-	    <section id="side">
-	        <section id="stream">
-	            <div class="player">
-	                <iframe src="https://player.twitch.tv/?channel=pgl_dota" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
-	            </div>
-	        </section>
-            <section id="chat">
-	            
-	        </section>
-	    </section>
-	</body>
+
+<head>
+    <title>Kappa Cloud</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.tmijs.org/js/latest/1.x/tmi.min.js"></script>
+    <script src="http://code.stephenmorley.org/javascript/queues/Queue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+    <script src="connect.js"></script>
+    <script src="app.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section class="center">
+        <section id="kappa"></section>
+    </section>
+    <section id="side">
+        <section id="stream">
+            <div class="player">
+                <iframe src="https://player.twitch.tv/?channel=pgl_dota" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+            </div>
+        </section>
+        <section id="chat">
+
+        </section>
+        <script type="text/javascript">
+            $("#chat").on("click", ".msg", function(e){
+                console.log(e);
+                $(".player iframe").attr("src", "https://player.twitch.tv/?channel=" + $(this).find(".channel").attr("data-channel"));
+                return false;
+            });
+        </script>
+    </section>
+</body>
+
 </html>

@@ -38,7 +38,7 @@ client.on("chat", function (channel, userstate, message, self) {
             emoteQueueObj.id = emote;
             emoteQueue.enqueue(emoteQueueObj);
             
-            console.log("Enqueued emote: ", emote);
+//            console.log("Enqueued emote: ", emote);
             
             //Make sure there's a number in here so we can easily add new hits
             if(!emoteMap.emotes[emote]){
@@ -62,20 +62,20 @@ client.on("chat", function (channel, userstate, message, self) {
                 if(emoteMap.emotes[dequeuedEmote.id].count < 1){
 //                    delete emoteMap.emotes[dequeuedEmote.id].count;
                 }
-                console.log("Dequeue'd emote: ", dequeuedEmote.id);
+//                console.log("Dequeue'd emote: ", dequeuedEmote.id);
             }
             
         }
         
         reweigh();
-        console.log(emoteMap);
+//        console.log(emoteMap);
     }
 });
 
 function getEmoteName(message, range){
-    console.log(message, " ", range)
+//    console.log(message, " ", range)
     var markers = range.split('-');
-    console.log(markers);
+//    console.log(markers);
     return message.substring(markers[0], markers[1] + 1);
 }
 
@@ -100,7 +100,7 @@ function reweigh(){
         var prevWeight = thisEmote.weight;
         //Base weight
         thisEmote.weight = thisEmote.count / emoteMap.totalEmotes;
-        console.log(`Reweighed emote '${emote}' from ${prevWeight} to ${thisEmote.weight}`);
+//        console.log(`Reweighed emote '${emote}' from ${prevWeight} to ${thisEmote.weight}`);
     }
     drawEmotes();
     
@@ -134,8 +134,9 @@ function drawEmotes(){
             emoteElement.attr("data-weight", currEmote.weight);
         }    
     }
-
-    
+        
+//        console.log(nodes);
+        
 }
 
 function drawchat(msgObj){
@@ -149,9 +150,12 @@ function drawchat(msgObj){
     var userName = $(`<span></span>`);
     userName.css("color", msgObj.userstate.color);
     userName.html(msgObj.userstate['display-name']);
-    console.log(userName);
-    var chatMsg = `<${msgObj.channel}> ${userName[0].outerHTML}: ${msgObj.message}`;
-    console.log(chatMsg);
+    var channelLink = $("<a href='#' class='channel'></a>");
+    channelLink.html(msgObj.channel);
+    channelLink.attr("data-channel", msgObj.channel.substring(1,msgObj.channel.length));
+//    console.log(userName);
+    var chatMsg = `<${channelLink[0].outerHTML}> ${userName[0].outerHTML}: ${msgObj.message}`;
+//    console.log(chatMsg);
     chatElement.append(chatMsg);
     
     $("#chat").append(chatElement);

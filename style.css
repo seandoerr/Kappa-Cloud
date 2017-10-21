@@ -16,6 +16,8 @@ body{
     flex-grow: 0;
     flex-shrink: 1;
     align-items: center;
+    background: mediumpurple;
+    height: 100%;
 }
 
 
@@ -35,6 +37,14 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    background: mediumpurple;
+}
+
+#kappa{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .emote{
@@ -52,4 +62,10 @@ body{
     position: relative;
     width: 100%;
     padding-bottom: 56.25%;
+}
+.msg{
+    padding: 3px 6px;
+}
+.msg:nth-child(odd){
+    background: rgba(0,255,255,.4);
 }
